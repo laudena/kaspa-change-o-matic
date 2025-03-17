@@ -79,7 +79,6 @@ async def is_valid_kaspa_address(address: str) -> bool:
     Returns:
         True if valid, False otherwise.
     """
-    return True
 
     print ("validating received address:", address)
     # Kaspa address must start with "kaspa:"

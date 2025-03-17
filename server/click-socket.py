@@ -71,7 +71,7 @@ SIGNAL_MAX_DURATION = 38
 TIME_WINDOW = 200  # Time window to count signals (in milliseconds)
 
 signals_to_amount = {
-    1: 1.00,  # Example: 1 signal = $0.10
+    1: 1.00,
     2: 2.00,
     3: 0.01,
     4: 0.02,
@@ -211,8 +211,14 @@ async def handle_scan_result(success, qr_code):
 
 async def run_kaspa_transaction():
 
-    amount_kaspa = str(shared_data['collected_amount'] / shared_data['usd_to_aud'] / shared_data["kaspa_price"]) #TODO: Remove division by 100 !!!!
     """Runs the Node.js script and processes its logs in real-time."""
+
+    amount_kaspa = str(shared_data['collected_amount'] / shared_data['usd_to_aud'] / shared_data['kaspa_price'])
+    print (f"Prepare transmission... collected_amount: {shared_data['collected_amount']} "
+       f"usd_aud: {shared_data['usd_to_aud']} "
+       f"kaspa_price: {shared_data['kaspa_price']} "
+       f"to send: {str(shared_data['collected_amount'] / shared_data['usd_to_aud'] / shared_data['kaspa_price'])} Kaspa")
+
     process = subprocess.Popen(
         ["node", SIMPLE_TRANSACTION_JS,
          "--encoding", "borsh", "--network", "mainnet",
