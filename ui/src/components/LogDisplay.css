@@ -1,0 +1,55 @@
+@keyframes slideIn {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+.animate-slideIn {
+    animation: slideIn 0.5s ease-out;
+}
+.log-container {
+    position: absolute;
+    bottom: 18%;
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    min-height: 280px;
+    left: 22%;
+    width: 58%;
+}
+
+.log-entry {
+    text-align: left;
+    background-color: #363636;
+    color: #70c7ba;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.submitted-message {
+    background-color: #49eacb;
+    color: white;
+    font-size: 1.25rem;
+    font-weight: bold;
+    text-align: center;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    animation: bounce 1s infinite;
+}
+
+/* Bounce animation */
+@keyframes bounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}

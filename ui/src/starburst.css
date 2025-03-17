@@ -1,0 +1,83 @@
+.starburst {
+    position: relative;
+    width: 70px;
+    height: 70px;
+    background: #49EACB;
+    color: #70C7BA;
+    font-size: 44px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    border-radius: 50%;
+    text-shadow: 3px 3px 4px #231F20;
+    z-index: 1000;
+}
+
+/* The wrapper around the text to ensure it stays static */
+.starburst .text {
+    position: relative;
+    z-index: 1001; /* Keep the text above the rotating star */
+}
+
+/* Add spikes using pseudo-elements */
+.starburst::before,
+.starburst::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 150px;
+    height: 150px;
+    background: inherit;
+    border-radius: 50%;
+    z-index: -1;
+    border: 2px solid rgba(0, 0, 0, 0);
+}
+
+/* Rotate the first layer of spikes */
+.starburst::before {
+    transform: translate(-50%, -50%) rotate(30deg);
+    clip-path: polygon(
+            50% 0%, 61% 35%, 98% 35%,
+            68% 57%, 79% 91%, 50% 70%,
+            21% 91%, 32% 57%, 2% 35%, 39% 35%
+    );
+}
+
+/* Rotate the second layer of spikes */
+.starburst::after {
+    transform: translate(-50%, -50%) rotate(180deg); /* Ensure it's rotated 180deg, not 65deg */
+    clip-path: polygon(
+            50% 0%, 61% 35%, 98% 35%,
+            68% 57%, 79% 91%, 50% 70%,
+            21% 91%, 32% 57%, 2% 35%, 39% 35%
+    );
+}
+
+/* Add rotation animation to the star (not the text) */
+.starburst::before{
+    animation: rotateStar 3s linear infinite;
+}
+.starburst::after {
+    animation: rotateStar2 3s linear infinite;
+}
+
+/* Define the rotation animation */
+@keyframes rotateStar {
+    0% {
+        transform: translate(-50%, -50%) rotate(0deg);
+    }
+    100% {
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
+}
+@keyframes rotateStar2 {
+    0% {
+        transform: translate(-50%, -50%) rotate(35deg);
+    }
+    100% {
+        transform: translate(-50%, -50%) rotate(395deg);
+    }
+}
