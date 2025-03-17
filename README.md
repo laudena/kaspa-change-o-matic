@@ -78,7 +78,6 @@ The ui will connect to that server's IP from the browser.```
 
 
 ### TODO, known issues, limitations
-* There's an issue with the conversion function 
 * The monitor doesn't work properly at the moment. Failed transactions are registered in a separate file, but there's no active resubmission process after 10 minutes.
-* I tried to come up with a full python application, but resolved to use the examples from `wasm` folder as a basis for my sub-processes
+* I tried to come up with a full python application, but resolved to use the examples from `wasm` folder as a basis for my sub-processes. I will extract it out of the ruspy-kaspa folder
 * 
