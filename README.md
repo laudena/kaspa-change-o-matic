@@ -4,7 +4,7 @@ Kaspa Coin Machine. Turn that loose change into digital gold.
 ## Prototype Demo
 
 https://youtu.be/p0bimvzxkUs
-[![Demo Video](https://img.youtube.com/vi/p0bimvzxkUs/maxresdefault.jpg)](https://www.youtube.com/watch?v=p0bimvzxkUs)
+[![Demo Video](https://img.youtube.com/vi/WOKqLp-X1bI/maxresdefault.jpg)](https://www.youtube.com/watch?v=WOKqLp-X1bI)
 
 
 ## Install
