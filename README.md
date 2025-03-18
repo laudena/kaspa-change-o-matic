@@ -3,8 +3,23 @@ Kaspa Coin Machine. Turn that loose change into digital gold.
 
 
 ## Install
+### Wiring Diagram
+#### Ingridients
+* 2 x 10kΩ Resistors
+* 1 x 10µF Ceramic Capacitor (106)
+* 1 x Raspberry Pi 5
+* 1 x Tiny Code Reader (by Useful Sensors)
+* 1 x 12V Power source
+* 1 x 5V USB-C Power source 
 
-### Client
+#### Breadboard layout
+<img src="./media/coinOmatic_sketch.png" width=600px/>
+
+* The Raspberry Pi and the Coin Acceptor use different power sources (12V and 5V respectively). 
+* In the future I will use a single power source, but for now I only connect their grounds, to receive the Coin Acceptor signal.
+
+
+### UI 
 
 * cd ui
  
@@ -13,7 +28,6 @@ Kaspa Coin Machine. Turn that loose change into digital gold.
 * Set the IP address of the Raspberry PI (where the python script is running) in `App.tsx`
 
 ### Server
-
 
 * cd server
 * pip install <module-name>
@@ -33,7 +47,7 @@ Kaspa Coin Machine. Turn that loose change into digital gold.
 ``` The python script will create a websocket running at `ws://0.0.0.0:8765`.
 The ui will connect to that server's IP from the browser.```
 
-* Open http://192.168.10.10:3000/ (use the Raspberry Pi's IP address)
+* Open http://192.168.10.10:3000/ (use the Raspberry Pi's IP-Address)
 
 ## More Info
 
