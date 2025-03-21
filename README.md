@@ -22,8 +22,9 @@ Kaspa Coin Machine. Turn that loose change into digital gold.
 #### Breadboard layout
 <img src="./media/coinOmatic_sketch.png" width=600px/>
 
-* The Raspberry Pi and the Coin Acceptor use different power sources (12V and 5V respectively). 
-* In the future I will use a single power source, but for now I only connect their grounds, to receive the Coin Acceptor signal.
+* The Raspberry Pi and the Coin Acceptor use different power sources (5V and 12V respectively). 
+* In the future I will use a single power source, but for now I only connect their grounds, so that the raspberry pi can receive the Coin Acceptor signal.
+* Coin Acceptor signal received as active low signal on the raspberry gpio
 
 
 ### UI 
