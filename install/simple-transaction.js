@@ -26,14 +26,7 @@ if (!privateKeyHex) {
 }
 const privateKey = new PrivateKey(privateKeyHex);
 
-async function sendKaspaTransactionResubmit(txObject) {
-    //TODO: complete the resubmission.handle missing objects from the above required
 
-    log(`Resubmit required for failed transaction: txid:${txObject.txid} recipient:${txObject.destinationAddress}, amount:${txObject.amount}`, "info");
-    // encoding = txObject.encoding;
-    // networkId = txObject.networkId;
-    // return await sendKaspaTransaction(txObject.destinationAddress, txObject.amount, txObject.retriesLeft);
-}
 async function sendKaspaTransaction(destinationAddress, amount, retriesLeft = 1) {
     try {
         //todo: convert to module. until then, the monitor will trigger a call here every time it "requires" the file
@@ -110,7 +103,7 @@ async function sendKaspaTransaction(destinationAddress, amount, retriesLeft = 1)
         return confirmed;
 
     } catch (error) {
-        log(`Error: ${error.message}`, "error");
+        log(`Exception: ${error.message || JSON.stringify(error)}`, "error");
         return false;
     }
 }
@@ -145,4 +138,3 @@ function savePendingTransaction(newTransaction) {
 sendKaspaTransaction(destinationAddressArg, amount)
     .catch((error) => log(`Unhandled error: ${error.message}`, "error"));
 
-module.exports = { sendKaspaTransactionResubmit };

@@ -5,6 +5,8 @@ export default function LogDisplay({ entries }: { entries: string[] }) {
     const [logs, setLogs] = useState<string[]>([]);
 
     useEffect(() => {
+        if (!entries || !Array.isArray(entries)) return;
+
         setLogs((prevLogs) => {
             const newLogs = entries.filter((entry) => !prevLogs.includes(entry));
             return [...prevLogs, ...newLogs];

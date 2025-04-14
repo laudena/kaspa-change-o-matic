@@ -5,7 +5,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-height: calc(100vh - 55px);
+  min-height: calc(100vh - 25px);
   text-align: center;
   padding: 20px;
   background-color: #70c7ba;
@@ -73,16 +73,16 @@ body {
   }
 }
 @keyframes backgroundFade {
-  0%   { background-color: #70C7BA; }
+  0%   { background-color: white; } /*#70C7BA*/
   50%  { background-color: #49EACB; }
-  100% { background-color: #70C7BA; }
+  100% { background-color: white; } /*#70C7BA*/
 }
 .money {
   position: absolute;
   top: 3%;
   width: 80%;
   text-align: right;
-  font-size: 3.1rem;
+  font-size: 3.6rem;
   left: 85%
 }
 .circle {
@@ -104,9 +104,9 @@ body {
 
 /* Apply the animation to the object */
 #mySvg {
-  width: 300px;
-  height: 300px;
-  animation: backgroundFade 1.5s infinite ease-in-out;
+  width: 400px;
+  height: 400px;
+  animation: backgroundFade 1s infinite ease-in-out;
 }
 
 .push-up-a-bit{
@@ -114,11 +114,74 @@ body {
 }
 
 @keyframes highlight {
-  0% { font-size: 3.1rem; }    /* Start at normal size */
-  15% { font-size: 8.4rem; }   /* Grow quickly */
-  100% { font-size: 3.1rem; }  /* Shrink back slowly */
+  0% { font-size: 3.6rem; }    /* Start at normal size */
+  15% { font-size: 9.0rem; }   /* Grow quickly */
+  100% { font-size: 3.6rem; }  /* Shrink back slowly */
 }
 
 .value-changed {
   animation: highlight 2.5s ease-in-out;
+}
+
+@media (max-width: 720px) {
+  .welcome-screen {
+    min-height: calc(100vh - 35px); /* Reduce from 100vh */
+    padding: 10px; /* Further reduce padding */
+  }
+
+  .kaspa-logo {
+    max-width: 225px; /* Keep 75% width */
+    margin-bottom: 10px; /* Reduce margin */
+  }
+
+  .welcome-message {
+    font-size: 2.1rem; /* Keep font size */
+    margin: 5px 0; /* Reduce margin */
+  }
+
+  .sub-heading, .start-prompt {
+    font-size: 1.125rem; /* Keep font size */
+    margin: 10px 0; /* Reduce margin */
+  }
+
+  .money {
+    /*font-size: 2.325rem; !* Keep font size *!*/
+    left: 75%;
+    top: 5%;
+  }
+
+  .circle {
+    width: 52.5px;
+    height: 52.5px;
+    font-size: 27px;
+    right: 5%;
+    top: 2%; /* Move up */
+  }
+
+  #mySvg {
+    width: 225px;
+    height: 225px;
+    margin-top: 30px; /* Pull up */
+  }
+
+  .push-up-a-bit {
+    height: 150px;
+  }
+
+  .prompt-container {
+    bottom: 3%; /* Move it up */
+  }
+
+  /*@keyframes highlight {*/
+  /*  0% { font-size: 2.325rem; }*/
+  /*  15% { font-size: 6.3rem; }*/
+  /*  100% { font-size: 2.325rem; }*/
+  /*}*/
+  img.scan-instructions{
+    padding: 50px;
+    width: 3700px
+  }
+  instructions-container{
+    background-color: #70c7ba;
+  }
 }

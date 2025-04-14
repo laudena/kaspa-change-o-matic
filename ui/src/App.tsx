@@ -15,7 +15,7 @@ const colors = {
 const kaspaLogoUrl = "/images/Kaspa-LDSP-Black.png";
 const kaspaWalletQrUrl = "/images/KaspiumQRCode.svg"; // Hardcoded QR URL
 
-const WS_URL = "ws://192.168.68.68:8765";
+const WS_URL = "ws://localhost:8765";
 
 type ScreenType =
     | "welcome"
@@ -53,7 +53,7 @@ const App: React.FC = () => {
   const [usd_to_currency, setUsdToCurrency] = useState<number>(0);
   const [submit_logs, setSubmitLogs] = useState<string[]>([]);
   const [submit_outcome, setSubmitOutcome] = useState(false);
-  const [error_log, setErrorLog] = useState<string>("");
+  const [error_log, setErrorLog] = useState<string[]>([]);
 
 
   const socketRef = useRef<WebSocket | null>(null);
@@ -81,7 +81,10 @@ const App: React.FC = () => {
             setScreen(message.data.screen);
             if (message.data.screen === "welcome"){
               setSubmitLogs([]);
-              setErrorLog("");
+              setErrorLog([]);
+            }
+            else if (message.data.screen === "error-page" && message.data.notification){
+              setErrorLog([...message.data.notification.split("/n")]);
             }
           }
 
@@ -94,14 +97,14 @@ const App: React.FC = () => {
             setKaspaPrice(Math.round((message.data.kaspa_price + Number.EPSILON) * 1000) / 1000);
             setUsdToCurrency(Math.round((1/(message.data.usd_to_aud) + Number.EPSILON) * 1000) / 1000);
           }
-          else if (message.event === "submit-log"){
-            setSubmitLogs((prevLogs) => [...prevLogs, message.data.type + " " + message.data.message]);
-          }
           else if (message.event === "submit-outcome"){
             setSubmitOutcome(message.data.result);
           }
-          else if (message.event === "error-log"){
-            setErrorLog(message.data.notification);
+          else if (message.event === "submit-log"){
+            setSubmitLogs((prevLogs) => [...prevLogs, message.data.type + " " + message.data.message]);
+          }
+          else if (message.event === "clear-error-logs"){
+            setErrorLog([]);
           }
 
         } catch (error) {
@@ -213,7 +216,7 @@ const App: React.FC = () => {
         {screen === "insert-coin" && (
             <Screen message="Feed me your spare coins!/n When you're done, hit the button below." buttonLabel="Go Go Go" />
         )}
-        {screen === "confirm-amount" && (
+        {screen === "confirm-amount" && inserted_money > 0 && (
             <Screen
                 message={`Sweet! You dropped in $${inserted_money}./nSo that brings us to: ${
                     // Number(usd_to_currency)
@@ -226,16 +229,26 @@ const App: React.FC = () => {
                 } KASPA`} buttonLabel="Ready to send?" extraContent={<h3>Kaspa price: ${kaspa_price}. &nbsp;USD/AUD Rate: ${usd_to_currency}. </h3>}
             />
         )}
+        {screen === "confirm-amount" && inserted_money <= 0 && (
+            <Screen
+                message={`Mate, you forgot to drop in some coins... Zero won't get you much Kaspa!`} buttonLabel="hmmm... what if I press softer?" extraContent={<h3>Kaspa price: ${kaspa_price}. &nbsp;USD/AUD Rate: ${usd_to_currency}. </h3>}
+            />
+        )}
         {screen === "scan-wallet" && (
             <Screen
-                message="Point your Kaspa wallet QR code at the scanner. /nLet me read your public address"
+                message="Point your Kaspa wallet QR-Code at the scanner on the right. /nLet me read your public address"
                 buttonLabel="Need help finding your public address QR code?"
+                extraContent={
+                  <div className="instructions-container">
+                    <img src="images/changeomatic-2.jpg" alt="Kaspa Change O Matic and a cellular with a qr-code on it" className="scan-instructions"/>
+                  </div>
+                }
             />
         )}
         {screen === "processing" && (
             <div>
               <Screen
-                message="Sending your Kaspa through the blockDAG... almost there..."
+                  message="Sending your Kaspa through the blockDAG... almost there..."
                 extraContent={<LogDisplay entries={submit_logs} /> }
                 buttonLabel="That was great! Let's do it again"
               />
@@ -246,7 +259,7 @@ const App: React.FC = () => {
             <Screen
                 message="Uh-oh! Something glitched. Don’t worry, your coins are safe. Try again!"
                 buttonLabel="Retry"
-                extraContent={<LogDisplay entries={[error_log]} /> }
+                extraContent={<LogDisplay entries={error_log} /> }
             />
         )}
       </>

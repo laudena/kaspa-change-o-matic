@@ -13,14 +13,14 @@
     animation: slideIn 0.5s ease-out;
 }
 .log-container {
-    position: absolute;
+    position: relative;
     bottom: 18%;
     display: flex;
     flex-direction: column;
     gap: 0.2rem;
-    min-height: 280px;
-    left: 22%;
-    width: 58%;
+    min-height: 330px;
+    left: 2%;
+    width: 95%;
 }
 
 .log-entry {
@@ -35,7 +35,7 @@
 .submitted-message {
     background-color: #49eacb;
     color: white;
-    font-size: 1.25rem;
+    font-size: 3.25rem;
     font-weight: bold;
     text-align: center;
     padding: 1rem;
@@ -50,6 +50,6 @@
         transform: translateY(0);
     }
     50% {
-        transform: translateY(-10px);
+        transform: translateY(-20px);
     }
 }

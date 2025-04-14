@@ -1,10 +1,11 @@
 .marquee-container {
-    width: 100%;
+    width: 98%;
     overflow: hidden;
     background: #222;
     padding: 10px 0;
-    position: relative;
+    position: absolute;
     white-space: nowrap;
+    z-index: 10;
 }
 
 .marquee {
